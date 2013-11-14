@@ -11560,9 +11560,8 @@
 					if(passphrase1 == passphrase2){
 						var total_keys = opw.paperwallet.wallet_details.length-1;
 						var index = 1;
-						encrypt(index);
-
-						function encrypt(index){
+						
+						var encrypt = function(index){
 							document.getElementById('busyencrypting').innerHTML = "Encrypting... This may take a minute or two. Encrypting key " + index + " of " + total_keys + ".";
 							var privatekey = opw.paperwallet.wallet_details[index].privateKeyWif;
 							ninja.privateKey.BIP38PrivateKeyToEncryptedKeyAsync(privatekey, passphrase1, false, function(eckey){
@@ -11572,6 +11571,8 @@
 								else encrypt(index);
 							});
 						};
+						
+						encrypt(index);
 					}
 					else{
 						alert('The passphrases do not match. Please type them again.');
